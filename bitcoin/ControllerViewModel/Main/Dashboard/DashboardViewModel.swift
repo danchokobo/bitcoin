@@ -78,7 +78,7 @@ extension DashboardViewModel {
     }
     
     func getEuroAmount() -> String {
-        let x = bitcoin.dollar ?? 0.0
+        let x = bitcoin.euro ?? 0.0
         return "\((x*100).rounded()/100)"
     }
 }
