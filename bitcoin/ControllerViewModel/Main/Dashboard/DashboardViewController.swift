@@ -68,7 +68,18 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             if let cell = tableView.dequeueReusableCell(withIdentifier: InfoTableViewCell.identifier,
                                                         for: indexPath) as? InfoTableViewCell {
+        
                 cell.setBitcoin(bitcoin: viewModel.bitcoin)
+                cell.dollarSelected = {
+                    cell.setAmount(amount: self.viewModel.getDollarAmount())
+                }
+                cell.tengeSelected = {
+                    cell.setAmount(amount: self.viewModel.getTengeAmount())
+                }
+                cell.euroSelected = {
+                    cell.setAmount(amount: self.viewModel.getEuroAmount())
+                }
+                
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 return cell

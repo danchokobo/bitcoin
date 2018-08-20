@@ -68,14 +68,17 @@ extension DashboardViewModel {
     }
     
     func getDollarAmount() -> String {
-        return "\(bitcoin.dollar ?? 0.0)"
+        let x = bitcoin.dollar ?? 0.0
+        return "\((x*100).rounded()/100)"
     }
     
     func getTengeAmount() -> String {
-        return "\(bitcoin.tenge ?? 0.0)"
+        let x = bitcoin.tenge ?? 0.0
+        return "\((x*100).rounded()/100)"
     }
     
     func getEuroAmount() -> String {
-        return "\(bitcoin.euro ?? 0.0)"
+        let x = bitcoin.dollar ?? 0.0
+        return "\((x*100).rounded()/100)"
     }
 }

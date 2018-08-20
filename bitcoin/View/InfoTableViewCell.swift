@@ -12,6 +12,9 @@ import Sugar
 
 class InfoTableViewCell: UITableViewCell {
     static let identifier = "BalanceTableViewCell"
+    var dollarSelected: () -> Void = {}
+    var tengeSelected: () -> Void = {}
+    var euroSelected: () -> Void = {}
     
     private lazy var amountLabel = UILabel().then {
         $0.textColor = .white
@@ -86,22 +89,30 @@ extension InfoTableViewCell {
 
 extension InfoTableViewCell {
     func setBitcoin(bitcoin: Bitcoin) {
-        amountLabel.text = "\(bitcoin.tenge ?? 0.0)"
+        let x = bitcoin.tenge ?? 0.0
+        amountLabel.text = "\((x*100).rounded()/100)"
+    }
+    
+    func setAmount(amount: String) {
+        amountLabel.text = amount
     }
     
     @objc func dollarSelected(button: UIButton) {
+        self.dollarSelected()
         button.isSelected = !button.isSelected
         tengeButton.isSelected = false
         euroButton.isSelected = false
     }
     
     @objc func tengeSelected(button: UIButton) {
+        self.tengeSelected()
         button.isSelected = !button.isSelected
         euroButton.isSelected = false
         dollarButton.isSelected = false
     }
     
     @objc func euroSelected(button: UIButton) {
+        self.euroSelected()
         button.isSelected = !button.isSelected
         tengeButton.isSelected = false
         dollarButton.isSelected = false

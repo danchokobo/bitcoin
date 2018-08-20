@@ -10,9 +10,9 @@ import Foundation
 import ObjectMapper
 
 class Bitcoin: Mappable {
-    var euro: Float?
-    var tenge: Float?
-    var dollar: Float?
+    var euro: Double?
+    var tenge: Double?
+    var dollar: Double?
     
     init() {
         
