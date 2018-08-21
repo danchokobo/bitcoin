@@ -83,8 +83,7 @@ extension DashboardViewModel {
             "end": dateFormatter(date: getCurrentDate()),
             "currency": currency
         ]
-        
-        barData.removeAll()
+        lineChartEntry.removeAll()
         Alamofire.request(Constants.historical, method: .get, parameters: params).responseJSON { (response) in
             if response.result.isSuccess {
                 if let json = response.result.value as? [String: Any] {
@@ -153,6 +152,7 @@ extension DashboardViewModel {
     }
 
     private func getDataForMonth(data: [String: Any]) {
+        monthLine.removeAll()
         let sortedData = data.sorted() { $0.key > $1.key }
         var lol = 0
         var values = [Double]()
@@ -171,6 +171,7 @@ extension DashboardViewModel {
     }
     
     private func getDataForYear(data: [String: Any]) {
+        yearLine.removeAll()
         let sortedData = data.sorted() { $0.key > $1.key }
         var lol = 0
         var values = [Double]()
