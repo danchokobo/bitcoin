@@ -22,7 +22,7 @@ class DashboardViewModel {
     
     init() {
         getInTenge()
-        fetchForWeek(currency: "EUR")
+        fetchForMonth(currency: "EUR")
     }
 }
 
@@ -107,8 +107,7 @@ extension DashboardViewModel {
             if response.result.isSuccess {
                 if let json = response.result.value as? [String: Any] {
                     guard let data = json["bpi"] as? [String: Any] else { return }
-                    let m = data.sorted() { $0.key > $1.key }
-
+                    self.getDataForMonth(data: data)
                 }
             }
         }
@@ -133,7 +132,22 @@ extension DashboardViewModel {
         inputFormatter.dateFormat = "E"
         return inputFormatter.string(from: showDate!)
     }
-    
+
+    private func getDataForMonth(data: [String: Any]) {
+        let sortedData = data.sorted() { $0.key > $1.key }
+        var lol = 0
+        var values = [Double]()
+        var weekNo = 1
+        for i in sortedData.enumerated() {
+            lol += 1
+            if( lol % 4 != 0) {
+                values.append(i.element.value as! Double)
+            }else{
+                self.barData.append(BarData.init(barTitle: "\(weekNo)W", barValue: Float(values.average) , pinText: "\(round(values.average))"))
+                weekNo += 1
+            }
+        }
+    }
     private func getCurrentDate() -> Date {
         return Date()
     }
