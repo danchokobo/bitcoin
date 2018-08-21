@@ -35,7 +35,6 @@ class DashboardViewController: UIViewController {
 extension DashboardViewController {
     private func configureViews() {
         view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
-        title = "Main"
         viewModel.delegate = self
         SVProgressHUD.show()
         view.addSubviews(tableView)
@@ -102,17 +101,21 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 let line = LineChartDataSet(values: viewModel.weekLineData, label: "Bitcoin")
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
+                cell.periodLabel.text = viewModel.getWeekPeriod()
                 cell.monthSelected = {
                     line.values = self.viewModel.monthLineData
                     cell.chart.data = self.addChartDataSet(line: line)
+                    cell.periodLabel.text = self.viewModel.getMonthPeriod()
                 }
                 cell.weekSelected = {
                     line.values = self.viewModel.weekLineData
                     cell.chart.data = self.addChartDataSet(line: line)
+                    cell.periodLabel.text = self.viewModel.getWeekPeriod()
                 }
                 cell.yearSelected = {
                     line.values = self.viewModel.yearLineData
                     cell.chart.data = self.addChartDataSet(line: line)
+                    cell.periodLabel.text = self.viewModel.getYearPeriod()
                 }
                 cell.chart.data = addChartDataSet(line: line)
                 return cell
@@ -124,9 +127,9 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 200
+            return 130
         default:
-            return 300
+            return 400
         }
     }
 }

@@ -22,24 +22,24 @@ class InfoTableViewCell: UITableViewCell {
     private lazy var amountLabel = UILabel().then {
         $0.textColor = .white
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 40)
+        $0.font = UIFont.systemFont(ofSize: 40, weight: .thin)
     }
     
     private lazy var dollarButton = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "american-dollar-symbol").resizeImage(32), for: .selected)
-        $0.setImage(#imageLiteral(resourceName: "dollarSelected").resizeImage(32), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "dollar").resizeImage(32), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "dollarSelected").resizeImage(32), for: .selected)
         $0.addTarget(self, action: #selector(dollarSelected(button:)), for: .touchUpInside)
     }
     
     private lazy var tengeButton = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "tenge").resizeImage(22), for: .selected)
-        $0.setImage(#imageLiteral(resourceName: "tengeSelected").resizeImage(22), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "tenge").resizeImage(22), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "tengeSelected").resizeImage(22), for: .selected)
         $0.addTarget(self, action: #selector(tengeSelected(button:)), for: .touchUpInside)
     }
     
     private lazy var euroButton = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "euro-symbol").resizeImage(32), for: .selected)
-        $0.setImage(#imageLiteral(resourceName: "euroSelected").resizeImage(32), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "euroSelected").resizeImage(32), for: .selected)
+        $0.setImage(#imageLiteral(resourceName: "euro").resizeImage(32), for: .normal)
         $0.addTarget(self, action: #selector(euroSelected(button:)), for: .touchUpInside)
     }
     
@@ -95,16 +95,16 @@ extension InfoTableViewCell {
         switch currentCurrency {
         case .kzt:
             let x = bitcoin.tenge ?? 0.0
-            amountLabel.text = "\((x*100).rounded()/100)"
+            amountLabel.text = "\((x*100).rounded()/100) ₸"
         case .usd:
             let x = bitcoin.dollar ?? 0.0
-            amountLabel.text = "\((x*100).rounded()/100)"
+            amountLabel.text = "\((x*100).rounded()/100) $"
         case .euro:
             let x = bitcoin.euro ?? 0.0
-            amountLabel.text = "\((x*100).rounded()/100)"
+            amountLabel.text = "\((x*100).rounded()/100) €"
         default:
             let x = bitcoin.tenge ?? 0.0
-            amountLabel.text = "\((x*100).rounded()/100)"
+            amountLabel.text = "\((x*100).rounded()/100) ₸"
         }
         
     }

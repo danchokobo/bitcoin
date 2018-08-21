@@ -17,7 +17,7 @@ protocol DashboardViewModelDelegate {
 class DashboardViewModel {
     var bitcoin = Bitcoin()
     var delegate: DashboardViewModelDelegate?
-    var weekLineData = [ChartDataEntry]()
+     var weekLineData = [ChartDataEntry]()
     var monthLineData = [ChartDataEntry]()
     var yearLineData = [ChartDataEntry]()
     
@@ -133,13 +133,32 @@ extension DashboardViewModel {
     }
     
     private func getDayName(date: String) -> String {
-        let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
-        let showDate = inputFormatter.date(from: date)
-        inputFormatter.dateFormat = "E"
-        return inputFormatter.string(from: showDate!)
+        let formatter = getInputFormatter()
+        let showDate = formatter.date(from: date)
+        formatter.dateFormat = "EEE dd"
+        return formatter.string(from: showDate!)
     }
 
+    private func getYear(date: String) -> String {
+        let formatter = getInputFormatter()
+        let showDate = formatter.date(from: date)
+        formatter.dateFormat = "MMM yyyy"
+        return formatter.string(from: showDate!)
+    }
+    
+    private func getMonth(date: String) -> String {
+        let formatter = getInputFormatter()
+        let showDate = formatter.date(from: date)
+        formatter.dateFormat = "dd MMM"
+        return formatter.string(from: showDate!)
+    }
+    
+    func getInputFormatter() -> DateFormatter {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        return inputFormatter
+    }
+    
     private func getDataForMonth(data: [String: Any]) {
         monthLineData.removeAll()
         let sortedData = data.sorted() { $0.key > $1.key }
@@ -174,6 +193,24 @@ extension DashboardViewModel {
                 monthNo += 1
             }
         }
+    }
+    
+    func getWeekPeriod() -> String {
+        let from = dateFormatter(date: getWeekDate())
+        let to = dateFormatter(date: getCurrentDate())
+        return "Period from \(getDayName(date: from)) to \(getDayName(date: to))"
+    }
+    
+    func getMonthPeriod() -> String {
+        let from = dateFormatter(date: getYearDate())
+        let to = dateFormatter(date: getCurrentDate())
+        return "Period from \(getMonth(date: from)) to \(getMonth(date: to))"
+    }
+    
+    func getYearPeriod() -> String {
+        let from = dateFormatter(date: getYearDate())
+        let to = dateFormatter(date: getCurrentDate())
+        return "Period from \(getYear(date: from)) to \(getYear(date: to))"
     }
     
     private func getCurrentDate() -> Date {
