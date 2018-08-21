@@ -17,7 +17,7 @@ class TabBarViewController: UITabBarController {
     }
     
     func configureControllers() {
-        self.viewControllers = [DashboardViewController(),HistoryViewController(),CurrencyConverterViewController()].compactMap { UINavigationController(rootViewController: $0) }
+        self.viewControllers = [DashboardViewController(),TransactionViewController(),CurrencyConverterViewController()].compactMap { UINavigationController(rootViewController: $0) }
     }
     
     func configureTabBarItems() {

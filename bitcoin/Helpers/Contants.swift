@@ -14,4 +14,5 @@ struct Constants {
     public static let getTenge = "\(serverCoindesk)/currentprice/KZT.json"
     public static let getDollar = "\(serverCoindesk)/currentprice/USD.json"
     public static let historical = "\(serverCoindesk)/historical/close.json"
+    public static let transactions = "https://www.bitstamp.net/api/v2/transactions/btcusd/"
 }
