@@ -17,7 +17,7 @@ protocol DashboardViewModelDelegate {
 class DashboardViewModel {
     var bitcoin = Bitcoin()
     var delegate: DashboardViewModelDelegate?
-     var weekLineData = [ChartDataEntry]()
+    var weekLineData = [ChartDataEntry]()
     var monthLineData = [ChartDataEntry]()
     var yearLineData = [ChartDataEntry]()
     

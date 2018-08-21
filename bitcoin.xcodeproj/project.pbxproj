@@ -10,6 +10,7 @@
 		2E6AC07BD4F56B372BEC4CC4 /* Pods_bitcoin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8B4190361D625794F9B39C /* Pods_bitcoin.framework */; };
 		D825B5E1212C617E0057B9E7 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825B5E0212C617E0057B9E7 /* Transaction.swift */; };
 		D825B5E3212C63BC0057B9E7 /* TransactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825B5E2212C63BC0057B9E7 /* TransactionCollectionViewCell.swift */; };
+		D825B5E5212C6EFC0057B9E7 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825B5E4212C6EFC0057B9E7 /* TransactionViewModel.swift */; };
 		D8369BEC212B351B00287DC3 /* Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8369BEB212B351B00287DC3 /* Bitcoin.swift */; };
 		D8369BEF212B382F00287DC3 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8369BEE212B382F00287DC3 /* Contants.swift */; };
 		D8369BF3212BEA0500287DC3 /* DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8369BF2212BEA0500287DC3 /* DateTools.swift */; };
@@ -33,6 +34,7 @@
 		6DCEB4675B19D903488B8AED /* Pods-bitcoin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcoin.release.xcconfig"; path = "Pods/Target Support Files/Pods-bitcoin/Pods-bitcoin.release.xcconfig"; sourceTree = "<group>"; };
 		D825B5E0212C617E0057B9E7 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		D825B5E2212C63BC0057B9E7 /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
+		D825B5E4212C6EFC0057B9E7 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		D8369BEB212B351B00287DC3 /* Bitcoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitcoin.swift; sourceTree = "<group>"; };
 		D8369BEE212B382F00287DC3 /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		D8369BF2212BEA0500287DC3 /* DateTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTools.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				D85E2A68212B0D4B004494DD /* TransactionViewController.swift */,
+				D825B5E4212C6EFC0057B9E7 /* TransactionViewModel.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				D85E2A67212B0D39004494DD /* DashboardViewController.swift in Sources */,
 				D85E2A76212B10CC004494DD /* ImageTools.swift in Sources */,
 				D8369BF3212BEA0500287DC3 /* DateTools.swift in Sources */,
+				D825B5E5212C6EFC0057B9E7 /* TransactionViewModel.swift in Sources */,
 				D85E2A6E212B0DB2004494DD /* DashboardViewModel.swift in Sources */,
 				D8369BEC212B351B00287DC3 /* Bitcoin.swift in Sources */,
 				D85E2A4E212B0C48004494DD /* AppDelegate.swift in Sources */,

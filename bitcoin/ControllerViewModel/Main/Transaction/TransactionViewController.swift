@@ -11,6 +11,8 @@ import EasyPeasy
 
 class TransactionViewController: UIViewController {
 
+    var viewModel = TransactionViewModel()
+    
     private lazy var collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumInteritemSpacing = 0
