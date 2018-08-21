@@ -14,5 +14,5 @@ target 'bitcoin' do
     pod 'SkeletonView'
     pod 'SVProgressHUD'
     pod 'ReachabilitySwift'
-    pod 'Charts'
+    pod 'Charts', :git => 'https://github.com/danchokobo/Charts.git'
 end
