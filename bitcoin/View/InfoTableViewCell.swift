@@ -11,7 +11,9 @@ import EasyPeasy
 import Sugar
 
 class InfoTableViewCell: UITableViewCell {
-    static let identifier = "BalanceTableViewCell"
+    
+    static let identifier = "InfoTableViewCell"
+    
     var dollarSelected: () -> Void = {}
     var tengeSelected: () -> Void = {}
     var euroSelected: () -> Void = {}

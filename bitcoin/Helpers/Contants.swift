@@ -9,8 +9,9 @@
 import UIKit
 
 struct Constants {
-    public static let currentPrice = "https://api.coindesk.com/v1/bpi/currentprice"
-    public static let getEuro = "\(currentPrice)/EUR.json"
-    public static let getTenge = "\(currentPrice)/KZT.json"
-    public static let getDollar = "\(currentPrice)/USD.json"
+    public static let serverCoindesk = "https://api.coindesk.com/v1/bpi"
+    public static let getEuro = "\(serverCoindesk)/currentprice/EUR.json"
+    public static let getTenge = "\(serverCoindesk)/currentprice/KZT.json"
+    public static let getDollar = "\(serverCoindesk)/currentprice/USD.json"
+    public static let historical = "\(serverCoindesk)/historical/close.json"
 }

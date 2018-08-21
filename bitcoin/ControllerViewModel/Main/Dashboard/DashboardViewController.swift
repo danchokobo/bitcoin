@@ -9,6 +9,8 @@
 import UIKit
 import EasyPeasy
 import SVProgressHUD
+import SwiftChart
+import ChartProgressBar
 
 class DashboardViewController: UIViewController {
 
@@ -18,6 +20,7 @@ class DashboardViewController: UIViewController {
         $0.delegate = self
         $0.dataSource = self
         $0.register(InfoTableViewCell.self, forCellReuseIdentifier: InfoTableViewCell.identifier)
+        $0.register(ChartTableViewCell.self, forCellReuseIdentifier: ChartTableViewCell.identifier)
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
     }
@@ -44,6 +47,11 @@ extension DashboardViewController {
     }
 }
 
+extension DashboardViewController: ChartProgressBarDelegate {
+    func ChartProgressBar(_ chartProgressBar: ChartProgressBar, didSelectRowAt rowIndex: Int) {
+        print(rowIndex)
+    }
+}
 extension DashboardViewController: DashboardViewModelDelegate {
     func updateBitcoin() {
         SVProgressHUD.dismiss()
@@ -85,8 +93,12 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
         default:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: InfoTableViewCell.identifier,
-                                                        for: indexPath) as? InfoTableViewCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ChartTableViewCell.identifier,
+                                                        for: indexPath) as? ChartTableViewCell {
+                cell.chart.data = viewModel.barData
+                cell.chart.maxValue = 6000                
+                cell.chart.delegate = self
+                cell.chart.build()
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 return cell

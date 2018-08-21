@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "894116C81E9D8BC2D45AE8B9294CC80D"
-               BlueprintName = "SVProgressHUD"
+               BlueprintIdentifier = "2D99F2C8E81A28F6494335B105793984"
+               BlueprintName = "ChartProgressBar"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SVProgressHUD.framework">
+               BuildableName = "ChartProgressBar.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
