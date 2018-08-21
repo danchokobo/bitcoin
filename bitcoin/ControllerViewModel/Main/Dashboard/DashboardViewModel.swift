@@ -27,7 +27,7 @@ class DashboardViewModel {
     
     init() {
         getInTenge()
-        fetchForWeek(currency: "KZT")
+        fetchForWeek(currency: "USD")
     }
 }
 
@@ -159,7 +159,7 @@ extension DashboardViewModel {
         var weekNo = 1
         for i in sortedData.enumerated() {
             lol += 1
-            if( lol % 4 != 0) {
+            if( lol % 7 != 0) {
                 values.append(i.element.value as! Double)
             }else{
 //                self.dataForMonth.append(BarData.init(barTitle: "\(weekNo)w", barValue: Float(values.average) , pinText: "\(round(values.average))"))
