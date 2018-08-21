@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SwiftChartVersionNumber;
-FOUNDATION_EXPORT const unsigned char SwiftChartVersionString[];
+FOUNDATION_EXPORT double ScrollableGraphViewVersionNumber;
+FOUNDATION_EXPORT const unsigned char ScrollableGraphViewVersionString[];
 

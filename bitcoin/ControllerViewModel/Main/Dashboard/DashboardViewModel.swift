@@ -8,7 +8,8 @@
 
 import Foundation
 import Alamofire
-import  ChartProgressBar
+import SVProgressHUD
+import ChartProgressBar
 
 protocol DashboardViewModelDelegate {
     func updateBitcoin()
@@ -17,12 +18,12 @@ class DashboardViewModel {
     var bitcoin = Bitcoin()
     var delegate: DashboardViewModelDelegate?
     var barData: [BarData] = []
-    var dataByMonth: [BarData] = []
-    var dataByYear: [BarData] = []
+    var dataForMonth: [BarData] = []
+    var dataForYear: [BarData] = []
     
     init() {
         getInTenge()
-        fetchForMonth(currency: "EUR")
+        fetchForWeek(currency: "EUR")
     }
 }
 
@@ -72,13 +73,14 @@ extension DashboardViewModel {
         }
     }
     
-    private func fetchForWeek(currency: String) {
+    func fetchForWeek(currency: String) {
         let params = [
             "start": dateFormatter(date: getWeekDate()),
             "end": dateFormatter(date: getCurrentDate()),
             "currency": currency
         ]
         
+        barData.removeAll()
         Alamofire.request(Constants.historical, method: .get, parameters: params).responseJSON { (response) in
             if response.result.isSuccess {
                 if let json = response.result.value as? [String: Any] {
@@ -89,11 +91,10 @@ extension DashboardViewModel {
                         let day = self.getDayName(date: i.element.key)
                         self.barData.append(BarData.init(barTitle: day, barValue: Float(value) , pinText: "\(round(value))"))
                     }
+                    self.fetchForMonth(currency: currency)
                 }
             }
         }
-        
-        
     }
     
     private func fetchForMonth(currency: String) {
@@ -108,6 +109,7 @@ extension DashboardViewModel {
                 if let json = response.result.value as? [String: Any] {
                     guard let data = json["bpi"] as? [String: Any] else { return }
                     self.getDataForMonth(data: data)
+                    self.fetchForYear(currency: currency)
                 }
             }
         }
@@ -121,7 +123,14 @@ extension DashboardViewModel {
         ]
         
         Alamofire.request(Constants.historical, method: .get, parameters: params).responseJSON { (response) in
-            
+            if response.result.isSuccess {
+                if let json = response.result.value as? [String: Any] {
+                    guard let data = json["bpi"] as? [String: Any] else { return }
+                    self.getDataForYear(data: data)
+                    SVProgressHUD.dismiss()
+                    self.delegate?.updateBitcoin()
+                }
+            }
         }
     }
     
@@ -143,11 +152,28 @@ extension DashboardViewModel {
             if( lol % 4 != 0) {
                 values.append(i.element.value as! Double)
             }else{
-                self.barData.append(BarData.init(barTitle: "\(weekNo)W", barValue: Float(values.average) , pinText: "\(round(values.average))"))
+                self.dataForMonth.append(BarData.init(barTitle: "\(weekNo)w", barValue: Float(values.average) , pinText: "\(round(values.average))"))
                 weekNo += 1
             }
         }
     }
+    
+    private func getDataForYear(data: [String: Any]) {
+        let sortedData = data.sorted() { $0.key > $1.key }
+        var lol = 0
+        var values = [Double]()
+        var monthNo = 1
+        for i in sortedData.enumerated() {
+            lol += 1
+            if( lol % 30 != 0) {
+                values.append(i.element.value as! Double)
+            }else{
+                self.dataForYear.append(BarData.init(barTitle: "\(monthNo)m", barValue: Float(values.average) , pinText: "\(round(values.average))"))
+                monthNo += 1
+            }
+        }
+    }
+    
     private func getCurrentDate() -> Date {
         return Date()
     }
@@ -182,4 +208,5 @@ extension DashboardViewModel {
         let x = bitcoin.euro ?? 0.0
         return "\((x*100).rounded()/100)"
     }
+    
 }

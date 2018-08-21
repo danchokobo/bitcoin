@@ -9,7 +9,6 @@
 import UIKit
 import EasyPeasy
 import SVProgressHUD
-import SwiftChart
 import ChartProgressBar
 
 class DashboardViewController: UIViewController {
@@ -58,6 +57,13 @@ extension DashboardViewController: DashboardViewModelDelegate {
         tableView.reloadData()
     }
 }
+
+extension DashboardViewController {
+    func fetchData(currency: String) {
+        SVProgressHUD.show()
+        viewModel.fetchForWeek(currency: currency)
+    }
+}
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -79,12 +85,15 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         
                 cell.setBitcoin(bitcoin: viewModel.bitcoin)
                 cell.dollarSelected = {
+                    self.fetchData(currency: "USD")
                     cell.setAmount(amount: self.viewModel.getDollarAmount())
                 }
                 cell.tengeSelected = {
+                    self.fetchData(currency: "KZT")
                     cell.setAmount(amount: self.viewModel.getTengeAmount())
                 }
                 cell.euroSelected = {
+                    self.fetchData(currency: "EUR")
                     cell.setAmount(amount: self.viewModel.getEuroAmount())
                 }
                 
@@ -96,6 +105,20 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChartTableViewCell.identifier,
                                                         for: indexPath) as? ChartTableViewCell {
                 cell.chart.data = viewModel.barData
+                cell.monthSelected = {
+                    cell.chart.removeValues()
+                    cell.chart.data = self.viewModel.dataForMonth
+                    cell.chart.build()
+                }
+                cell.yearSelected = {
+                    cell.chart.data = self.viewModel.dataForYear
+                    cell.chart.barWidth = 12
+                    cell.chart.build()
+                }
+                cell.weekSelected = {
+                    cell.chart.data = self.viewModel.barData
+                    cell.chart.build()
+                }
                 cell.chart.maxValue = 6000                
                 cell.chart.delegate = self
                 cell.chart.build()

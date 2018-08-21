@@ -43,7 +43,6 @@ public class ChartProgressBar: UIView {
 	this method build the progress bar into a stackview
 	*/
 	public func build() {
-		
 		if pinTitleFont == nil {
 			pinTitleFont = UIFont(name: "HelveticaNeue-bold", size: CGFloat(pinTxtSize))
 		}

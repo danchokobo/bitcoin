@@ -4,10 +4,10 @@ PODS:
   - EasyPeasy (1.7.0)
   - ObjectMapper (3.3.0)
   - ReachabilitySwift (4.1.0)
+  - ScrollableGraphView (4.0.5)
   - SkeletonView (1.2.1)
   - Sugar (4.0.0)
   - SVProgressHUD (2.2.5)
-  - SwiftChart (1.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
@@ -15,10 +15,10 @@ DEPENDENCIES:
   - EasyPeasy (~> 1.6)
   - ObjectMapper (~> 3.1)
   - ReachabilitySwift
+  - ScrollableGraphView
   - SkeletonView
   - Sugar (~> 4.0)
   - SVProgressHUD
-  - SwiftChart
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -27,10 +27,10 @@ SPEC REPOS:
     - EasyPeasy
     - ObjectMapper
     - ReachabilitySwift
+    - ScrollableGraphView
     - SkeletonView
     - Sugar
     - SVProgressHUD
-    - SwiftChart
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -38,11 +38,11 @@ SPEC CHECKSUMS:
   EasyPeasy: 2f2785ed78c6f9e9045221f2ff317730e7321bff
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  ScrollableGraphView: 6386dbae8d92e8ec9fda9f386f2ba6e2c90c59a3
   SkeletonView: 98a31213f9282076149e6eb23f46734604f02086
   Sugar: afdf6d91da6112e7c3f12000bdddf1713237e0e6
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  SwiftChart: ba767a678d568a5ee22d419e146a0582865e1aff
 
-PODFILE CHECKSUM: 5096027a3ff3e5c3ce5ae3c4d350d7c1ecc7aded
+PODFILE CHECKSUM: dfebb0fcd755c9e817b0268baee071bedc0d24b4
 
 COCOAPODS: 1.5.3
