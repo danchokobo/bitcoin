@@ -17,6 +17,8 @@ class DashboardViewModel {
     var bitcoin = Bitcoin()
     var delegate: DashboardViewModelDelegate?
     var barData: [BarData] = []
+    var dataByMonth: [BarData] = []
+    var dataByYear: [BarData] = []
     
     init() {
         getInTenge()
@@ -81,8 +83,8 @@ extension DashboardViewModel {
             if response.result.isSuccess {
                 if let json = response.result.value as? [String: Any] {
                     guard let data = json["bpi"] as? [String: Any] else { return }
-                    
-                    for i in data.enumerated() {
+                    let m = data.sorted() { $0.key > $1.key }
+                    for i in m.enumerated() {
                         let value = i.element.value as! Double
                         let day = self.getDayName(date: i.element.key)
                         self.barData.append(BarData.init(barTitle: day, barValue: Float(value) , pinText: "\(round(value))"))
@@ -102,7 +104,13 @@ extension DashboardViewModel {
         ]
         
         Alamofire.request(Constants.historical, method: .get, parameters: params).responseJSON { (response) in
-            
+            if response.result.isSuccess {
+                if let json = response.result.value as? [String: Any] {
+                    guard let data = json["bpi"] as? [String: Any] else { return }
+                    let m = data.sorted() { $0.key > $1.key }
+
+                }
+            }
         }
     }
     
@@ -125,6 +133,7 @@ extension DashboardViewModel {
         inputFormatter.dateFormat = "E"
         return inputFormatter.string(from: showDate!)
     }
+    
     private func getCurrentDate() -> Date {
         return Date()
     }
