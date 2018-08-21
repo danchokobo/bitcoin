@@ -83,8 +83,9 @@ extension DashboardViewModel {
                     guard let data = json["bpi"] as? [String: Any] else { return }
                     
                     for i in data.enumerated() {
-                        let doubleValue = i.element.value as! Double
-                        self.barData.append(BarData.init(barTitle: i.element.key, barValue: Float(doubleValue) , pinText: "1.4 €"))
+                        let value = i.element.value as! Double
+                        let day = self.getDayName(date: i.element.key)
+                        self.barData.append(BarData.init(barTitle: day, barValue: Float(value) , pinText: "\(round(value))"))
                     }
                 }
             }
@@ -117,6 +118,13 @@ extension DashboardViewModel {
         }
     }
     
+    private func getDayName(date: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        let showDate = inputFormatter.date(from: date)
+        inputFormatter.dateFormat = "E"
+        return inputFormatter.string(from: showDate!)
+    }
     private func getCurrentDate() -> Date {
         return Date()
     }

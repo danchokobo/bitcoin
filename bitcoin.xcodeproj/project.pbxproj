@@ -10,6 +10,7 @@
 		2E6AC07BD4F56B372BEC4CC4 /* Pods_bitcoin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8B4190361D625794F9B39C /* Pods_bitcoin.framework */; };
 		D8369BEC212B351B00287DC3 /* Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8369BEB212B351B00287DC3 /* Bitcoin.swift */; };
 		D8369BEF212B382F00287DC3 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8369BEE212B382F00287DC3 /* Contants.swift */; };
+		D8369BF3212BEA0500287DC3 /* DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8369BF2212BEA0500287DC3 /* DateTools.swift */; };
 		D85E2A4E212B0C48004494DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E2A4D212B0C48004494DD /* AppDelegate.swift */; };
 		D85E2A53212B0C48004494DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85E2A51212B0C48004494DD /* Main.storyboard */; };
 		D85E2A55212B0C4B004494DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85E2A54212B0C4B004494DD /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		6DCEB4675B19D903488B8AED /* Pods-bitcoin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcoin.release.xcconfig"; path = "Pods/Target Support Files/Pods-bitcoin/Pods-bitcoin.release.xcconfig"; sourceTree = "<group>"; };
 		D8369BEB212B351B00287DC3 /* Bitcoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitcoin.swift; sourceTree = "<group>"; };
 		D8369BEE212B382F00287DC3 /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		D8369BF2212BEA0500287DC3 /* DateTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTools.swift; sourceTree = "<group>"; };
 		D85E2A4A212B0C48004494DD /* bitcoin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bitcoin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85E2A4D212B0C48004494DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D85E2A52212B0C48004494DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				D85E2A75212B10CC004494DD /* ImageTools.swift */,
+				D8369BF2212BEA0500287DC3 /* DateTools.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				D85E2A78212B218E004494DD /* InfoTableViewCell.swift in Sources */,
 				D85E2A67212B0D39004494DD /* DashboardViewController.swift in Sources */,
 				D85E2A76212B10CC004494DD /* ImageTools.swift in Sources */,
+				D8369BF3212BEA0500287DC3 /* DateTools.swift in Sources */,
 				D85E2A6E212B0DB2004494DD /* DashboardViewModel.swift in Sources */,
 				D8369BEC212B351B00287DC3 /* Bitcoin.swift in Sources */,
 				D85E2A4E212B0C48004494DD /* AppDelegate.swift in Sources */,
