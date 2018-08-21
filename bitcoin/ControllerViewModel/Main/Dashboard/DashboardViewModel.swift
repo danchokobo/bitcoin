@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 import SVProgressHUD
-import ChartProgressBar
 import Charts
 
 protocol DashboardViewModelDelegate {
@@ -18,9 +17,6 @@ protocol DashboardViewModelDelegate {
 class DashboardViewModel {
     var bitcoin = Bitcoin()
     var delegate: DashboardViewModelDelegate?
-    var barData: [BarData] = []
-    var dataForMonth: [BarData] = []
-    var dataForYear: [BarData] = []
     var weekLineData = [ChartDataEntry]()
     var monthLineData = [ChartDataEntry]()
     var yearLineData = [ChartDataEntry]()

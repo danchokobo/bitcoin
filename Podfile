@@ -14,6 +14,5 @@ target 'bitcoin' do
     pod 'SkeletonView'
     pod 'SVProgressHUD'
     pod 'ReachabilitySwift'
-    pod 'ChartProgressBar'
     pod 'Charts'
 end

@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.7.2)
-  - ChartProgressBar (1.0.4)
   - Charts (3.1.1):
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
@@ -13,7 +12,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
-  - ChartProgressBar
   - Charts
   - EasyPeasy (~> 1.6)
   - ObjectMapper (~> 3.1)
@@ -25,7 +23,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - ChartProgressBar
     - Charts
     - EasyPeasy
     - ObjectMapper
@@ -36,7 +33,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  ChartProgressBar: 1fe24fc286de1a3a8d02dcbdf6bc779c8e85865b
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   EasyPeasy: 2f2785ed78c6f9e9045221f2ff317730e7321bff
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -45,6 +41,6 @@ SPEC CHECKSUMS:
   Sugar: afdf6d91da6112e7c3f12000bdddf1713237e0e6
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 9e198dfde607333d51b6587f142b4e3c0c70c2ff
+PODFILE CHECKSUM: 53f6b84687e8dbd3a9f8e665a268438fd8d4f94a
 
 COCOAPODS: 1.5.3

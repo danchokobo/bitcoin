@@ -9,7 +9,6 @@
 import UIKit
 import EasyPeasy
 import SVProgressHUD
-import ChartProgressBar
 import Charts
 
 class DashboardViewController: UIViewController {
@@ -47,11 +46,6 @@ extension DashboardViewController {
     }
 }
 
-extension DashboardViewController: ChartProgressBarDelegate {
-    func ChartProgressBar(_ chartProgressBar: ChartProgressBar, didSelectRowAt rowIndex: Int) {
-        print(rowIndex)
-    }
-}
 extension DashboardViewController: DashboardViewModelDelegate {
     func updateBitcoin() {
         SVProgressHUD.dismiss()
