@@ -20,6 +20,13 @@ class ChartTableViewCell: UITableViewCell {
     lazy var chart = LineChartView().then {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
+        $0.chartDescription?.enabled = false
+        $0.dragEnabled = true
+        $0.setScaleEnabled(true)
+        $0.pinchZoomEnabled = true
+        $0.rightAxis.enabled = false
+        $0.leftAxis.enabled = false
+        $0.backgroundColor = .clear
     }
     
     lazy var periodLabel = UILabel().then {

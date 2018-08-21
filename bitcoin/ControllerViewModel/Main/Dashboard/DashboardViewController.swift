@@ -57,12 +57,13 @@ extension DashboardViewController {
         SVProgressHUD.show()
         viewModel.fetchForWeek(currency: currency)
     }
+    func addChartDataSet(line: LineChartDataSet) -> LineChartData {
+        let data = LineChartData()
+        data.addDataSet(line)
+        return data
+    }
 }
 extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -127,17 +128,9 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 130
+            return 150
         default:
             return 400
         }
-    }
-}
-
-extension DashboardViewController {
-    func addChartDataSet(line: LineChartDataSet) -> LineChartData {
-        let data = LineChartData()
-        data.addDataSet(line)
-        return data
     }
 }

@@ -23,7 +23,7 @@ class DashboardViewModel {
     
     init() {
         getInTenge()
-        fetchForWeek(currency: "USD")
+        fetchForWeek(currency: "KZT")
     }
 }
 

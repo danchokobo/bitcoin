@@ -25,14 +25,14 @@ open class AxisBase: ComponentBase
     private var _axisValueFormatter: IAxisValueFormatter?
     
     @objc open var labelFont = NSUIFont.systemFont(ofSize: 10.0)
-    @objc open var labelTextColor = NSUIColor.black
+    @objc open var labelTextColor = NSUIColor.white
     
-    @objc open var axisLineColor = NSUIColor.gray
+    @objc open var axisLineColor = NSUIColor.white 
     @objc open var axisLineWidth = CGFloat(0.5)
     @objc open var axisLineDashPhase = CGFloat(0.0)
     @objc open var axisLineDashLengths: [CGFloat]!
     
-    @objc open var gridColor = NSUIColor.gray.withAlphaComponent(0.9)
+    @objc open var gridColor = NSUIColor.white.withAlphaComponent(0.9)
     @objc open var gridLineWidth = CGFloat(0.5)
     @objc open var gridLineDashPhase = CGFloat(0.0)
     @objc open var gridLineDashLengths: [CGFloat]!
