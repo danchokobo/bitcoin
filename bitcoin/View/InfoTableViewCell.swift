@@ -17,6 +17,7 @@ class InfoTableViewCell: UITableViewCell {
     var dollarSelected: () -> Void = {}
     var tengeSelected: () -> Void = {}
     var euroSelected: () -> Void = {}
+    var currentCurrency: Currency!
     
     private lazy var amountLabel = UILabel().then {
         $0.textColor = .white
@@ -91,12 +92,25 @@ extension InfoTableViewCell {
 
 extension InfoTableViewCell {
     func setBitcoin(bitcoin: Bitcoin) {
-        let x = bitcoin.tenge ?? 0.0
-        amountLabel.text = "\((x*100).rounded()/100)"
+        switch currentCurrency {
+        case .kzt:
+            let x = bitcoin.tenge ?? 0.0
+            amountLabel.text = "\((x*100).rounded()/100)"
+        case .usd:
+            let x = bitcoin.dollar ?? 0.0
+            amountLabel.text = "\((x*100).rounded()/100)"
+        case .euro:
+            let x = bitcoin.euro ?? 0.0
+            amountLabel.text = "\((x*100).rounded()/100)"
+        default:
+            let x = bitcoin.tenge ?? 0.0
+            amountLabel.text = "\((x*100).rounded()/100)"
+        }
+        
     }
     
-    func setAmount(amount: String) {
-        amountLabel.text = amount
+    func setAmount(currency: Currency) {
+        currentCurrency = currency
     }
     
     @objc func dollarSelected(button: UIButton) {

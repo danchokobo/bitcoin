@@ -87,15 +87,15 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.setBitcoin(bitcoin: viewModel.bitcoin)
                 cell.dollarSelected = {
                     self.fetchData(currency: "USD")
-                    cell.setAmount(amount: self.viewModel.getDollarAmount())
+                    cell.setAmount(currency: .usd)
                 }
                 cell.tengeSelected = {
                     self.fetchData(currency: "KZT")
-                    cell.setAmount(amount: self.viewModel.getTengeAmount())
+                    cell.setAmount(currency: .kzt)
                 }
                 cell.euroSelected = {
                     self.fetchData(currency: "EUR")
-                    cell.setAmount(amount: self.viewModel.getEuroAmount())
+                    cell.setAmount(currency: .euro)
                 }
                 
                 cell.backgroundColor = .clear
@@ -105,39 +105,26 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChartTableViewCell.identifier,
                                                         for: indexPath) as? ChartTableViewCell {
-                let line1 = LineChartDataSet(values: viewModel.lineChartEntry, label: "Bitcoin")
-                line1.colors = [.yellow]
+                let line = LineChartDataSet(values: viewModel.weekLineData, label: "Bitcoin")
                 cell.backgroundColor = .clear
                 cell.selectionStyle = .none
                 cell.monthSelected = {
-                    line1.values = self.viewModel.monthLine
-                    let data = LineChartData()
-                    data.addDataSet(line1)
-                    cell.chart.data = data
-
+                    line.values = self.viewModel.monthLineData
+                    cell.chart.data = self.addChartDataSet(line: line)
                 }
-                
                 cell.weekSelected = {
-                    line1.values = self.viewModel.lineChartEntry
-                    let data = LineChartData()
-                    data.addDataSet(line1)
-                    cell.chart.data = data
+                    line.values = self.viewModel.weekLineData
+                    cell.chart.data = self.addChartDataSet(line: line)
                 }
-                
                 cell.yearSelected = {
-                    line1.values = self.viewModel.yearLine
-                    let data = LineChartData()
-                    data.addDataSet(line1)
-                    cell.chart.data = data
+                    line.values = self.viewModel.yearLineData
+                    cell.chart.data = self.addChartDataSet(line: line)
                 }
-                let data = LineChartData()
-                data.addDataSet(line1)
-                cell.chart.data = data
+                cell.chart.data = addChartDataSet(line: line)
                 return cell
             }
         }
         return UITableViewCell()
-
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -147,5 +134,13 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return 300
         }
+    }
+}
+
+extension DashboardViewController {
+    func addChartDataSet(line: LineChartDataSet) -> LineChartData {
+        let data = LineChartData()
+        data.addDataSet(line)
+        return data
     }
 }

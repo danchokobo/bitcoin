@@ -9,6 +9,12 @@
 import Foundation
 import ObjectMapper
 
+enum Currency {
+    case kzt
+    case usd
+    case euro
+}
+
 class Bitcoin: Mappable {
     var euro: Double?
     var tenge: Double?

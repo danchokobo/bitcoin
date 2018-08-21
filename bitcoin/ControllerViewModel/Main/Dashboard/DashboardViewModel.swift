@@ -21,9 +21,9 @@ class DashboardViewModel {
     var barData: [BarData] = []
     var dataForMonth: [BarData] = []
     var dataForYear: [BarData] = []
-    var lineChartEntry = [ChartDataEntry]()
-    var monthLine = [ChartDataEntry]()
-    var yearLine = [ChartDataEntry]()
+    var weekLineData = [ChartDataEntry]()
+    var monthLineData = [ChartDataEntry]()
+    var yearLineData = [ChartDataEntry]()
     
     init() {
         getInTenge()
@@ -83,7 +83,7 @@ extension DashboardViewModel {
             "end": dateFormatter(date: getCurrentDate()),
             "currency": currency
         ]
-        lineChartEntry.removeAll()
+        weekLineData.removeAll()
         Alamofire.request(Constants.historical, method: .get, parameters: params).responseJSON { (response) in
             if response.result.isSuccess {
                 if let json = response.result.value as? [String: Any] {
@@ -93,13 +93,8 @@ extension DashboardViewModel {
                     for i in m.enumerated() {
                         lol += 1
                         let value = ChartDataEntry(x: Double(lol), y: i.element.value as! Double)
-                        self.lineChartEntry.append(value)
+                        self.weekLineData.append(value)
                     }
-//                    for i in m.enumerated() {
-//                        let value = i.element.value as! Double
-//                        let day = self.getDayName(date: i.element.key)
-//                        self.barData.append(BarData.init(barTitle: day, barValue: Float(value) , pinText: "\(round(value))"))
-//                    }
                     self.fetchForMonth(currency: currency)
                 }
             }
@@ -112,7 +107,6 @@ extension DashboardViewModel {
             "end": dateFormatter(date: getCurrentDate()),
             "currency": currency
         ]
-        
         Alamofire.request(Constants.historical, method: .get, parameters: params).responseJSON { (response) in
             if response.result.isSuccess {
                 if let json = response.result.value as? [String: Any] {
@@ -130,7 +124,6 @@ extension DashboardViewModel {
             "end": dateFormatter(date: getCurrentDate()),
             "currency": currency
         ]
-        
         Alamofire.request(Constants.historical, method: .get, parameters: params).responseJSON { (response) in
             if response.result.isSuccess {
                 if let json = response.result.value as? [String: Any] {
@@ -152,7 +145,7 @@ extension DashboardViewModel {
     }
 
     private func getDataForMonth(data: [String: Any]) {
-        monthLine.removeAll()
+        monthLineData.removeAll()
         let sortedData = data.sorted() { $0.key > $1.key }
         var lol = 0
         var values = [Double]()
@@ -162,16 +155,15 @@ extension DashboardViewModel {
             if( lol % 7 != 0) {
                 values.append(i.element.value as! Double)
             }else{
-//                self.dataForMonth.append(BarData.init(barTitle: "\(weekNo)w", barValue: Float(values.average) , pinText: "\(round(values.average))"))
                 let value = ChartDataEntry(x: Double(weekNo), y: values.average)
-                self.monthLine.append(value)
+                self.monthLineData.append(value)
                 weekNo += 1
             }
         }
     }
     
     private func getDataForYear(data: [String: Any]) {
-        yearLine.removeAll()
+        yearLineData.removeAll()
         let sortedData = data.sorted() { $0.key > $1.key }
         var lol = 0
         var values = [Double]()
@@ -181,9 +173,8 @@ extension DashboardViewModel {
             if( lol % 30 != 0) {
                 values.append(i.element.value as! Double)
             }else{
-//                self.dataForYear.append(BarData.init(barTitle: "\(monthNo)m", barValue: Float(values.average) , pinText: "\(round(values.average))"))
                 let value = ChartDataEntry(x: Double(monthNo), y: values.average)
-                self.yearLine.append(value)
+                self.yearLineData.append(value)
                 monthNo += 1
             }
         }
@@ -206,22 +197,4 @@ extension DashboardViewModel {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: date)
     }
-}
-
-extension DashboardViewModel {
-    func getDollarAmount() -> String {
-        let x = bitcoin.dollar ?? 0.0
-        return "\((x*100).rounded()/100)"
-    }
-    
-    func getTengeAmount() -> String {
-        let x = bitcoin.tenge ?? 0.0
-        return "\((x*100).rounded()/100)"
-    }
-    
-    func getEuroAmount() -> String {
-        let x = bitcoin.euro ?? 0.0
-        return "\((x*100).rounded()/100)"
-    }
-    
 }
