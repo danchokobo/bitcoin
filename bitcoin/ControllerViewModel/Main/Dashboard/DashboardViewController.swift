@@ -10,6 +10,7 @@ import UIKit
 import EasyPeasy
 import SVProgressHUD
 import ChartProgressBar
+import Charts
 
 class DashboardViewController: UIViewController {
 
@@ -104,26 +105,31 @@ extension DashboardViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChartTableViewCell.identifier,
                                                         for: indexPath) as? ChartTableViewCell {
-                cell.chart.data = viewModel.barData
-                cell.monthSelected = {
-                    cell.chart.removeValues()
-                    cell.chart.data = self.viewModel.dataForMonth
-                    cell.chart.build()
-                }
-                cell.yearSelected = {
-                    cell.chart.data = self.viewModel.dataForYear
-                    cell.chart.barWidth = 12
-                    cell.chart.build()
-                }
-                cell.weekSelected = {
-                    cell.chart.data = self.viewModel.barData
-                    cell.chart.build()
-                }
-                cell.chart.maxValue = 6000                
-                cell.chart.delegate = self
-                cell.chart.build()
+                let line1 = LineChartDataSet(values: viewModel.lineChartEntry, label: "Bitcoin")
+                line1.colors = [.yellow, .red]
+                let data = LineChartData()
+                data.addDataSet(line1)
+                cell.chart.data = data
+//                cell.chart.data = viewModel.barData
+//                cell.monthSelected = {
+//                    cell.chart.removeValues()
+//                    cell.chart.data = self.viewModel.dataForMonth
+//                    cell.chart.build()
+//                }
+//                cell.yearSelected = {
+//                    cell.chart.data = self.viewModel.dataForYear
+//                    cell.chart.barWidth = 12
+//                    cell.chart.build()
+//                }
+//                cell.weekSelected = {
+//                    cell.chart.data = self.viewModel.barData
+//                    cell.chart.build()
+//                }
+//                cell.chart.maxValue = 6000
+//                cell.chart.delegate = self
+//                cell.chart.build()
                 cell.backgroundColor = .clear
-                cell.selectionStyle = .none
+//                cell.selectionStyle = .none
                 return cell
             }
         }

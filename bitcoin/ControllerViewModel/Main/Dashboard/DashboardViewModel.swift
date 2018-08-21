@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import SVProgressHUD
 import ChartProgressBar
+import Charts
 
 protocol DashboardViewModelDelegate {
     func updateBitcoin()
@@ -20,10 +21,13 @@ class DashboardViewModel {
     var barData: [BarData] = []
     var dataForMonth: [BarData] = []
     var dataForYear: [BarData] = []
+    var lineChartEntry = [ChartDataEntry]()
+    var monthLine = [ChartDataEntry]()
+    var yearLine = [ChartDataEntry]()
     
     init() {
         getInTenge()
-        fetchForWeek(currency: "EUR")
+        fetchForWeek(currency: "KZT")
     }
 }
 
@@ -86,11 +90,17 @@ extension DashboardViewModel {
                 if let json = response.result.value as? [String: Any] {
                     guard let data = json["bpi"] as? [String: Any] else { return }
                     let m = data.sorted() { $0.key > $1.key }
+                    var lol = 0
                     for i in m.enumerated() {
-                        let value = i.element.value as! Double
-                        let day = self.getDayName(date: i.element.key)
-                        self.barData.append(BarData.init(barTitle: day, barValue: Float(value) , pinText: "\(round(value))"))
+                        lol += 1
+                        let value = ChartDataEntry(x: Double(lol), y: i.element.value as! Double)
+                        self.lineChartEntry.append(value)
                     }
+//                    for i in m.enumerated() {
+//                        let value = i.element.value as! Double
+//                        let day = self.getDayName(date: i.element.key)
+//                        self.barData.append(BarData.init(barTitle: day, barValue: Float(value) , pinText: "\(round(value))"))
+//                    }
                     self.fetchForMonth(currency: currency)
                 }
             }
@@ -152,7 +162,9 @@ extension DashboardViewModel {
             if( lol % 4 != 0) {
                 values.append(i.element.value as! Double)
             }else{
-                self.dataForMonth.append(BarData.init(barTitle: "\(weekNo)w", barValue: Float(values.average) , pinText: "\(round(values.average))"))
+//                self.dataForMonth.append(BarData.init(barTitle: "\(weekNo)w", barValue: Float(values.average) , pinText: "\(round(values.average))"))
+                let value = ChartDataEntry(x: Double(weekNo), y: values.average)
+                self.monthLine.append(value)
                 weekNo += 1
             }
         }
@@ -168,7 +180,9 @@ extension DashboardViewModel {
             if( lol % 30 != 0) {
                 values.append(i.element.value as! Double)
             }else{
-                self.dataForYear.append(BarData.init(barTitle: "\(monthNo)m", barValue: Float(values.average) , pinText: "\(round(values.average))"))
+//                self.dataForYear.append(BarData.init(barTitle: "\(monthNo)m", barValue: Float(values.average) , pinText: "\(round(values.average))"))
+                let value = ChartDataEntry(x: Double(monthNo), y: values.average)
+                self.yearLine.append(value)
                 monthNo += 1
             }
         }
