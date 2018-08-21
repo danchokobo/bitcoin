@@ -12,7 +12,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
-  - Charts
+  - Charts (from `https://github.com/danchokobo/Charts.git`)
   - EasyPeasy (~> 1.6)
   - ObjectMapper (~> 3.1)
   - ReachabilitySwift
@@ -23,7 +23,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - Charts
     - EasyPeasy
     - ObjectMapper
     - ReachabilitySwift
@@ -31,9 +30,18 @@ SPEC REPOS:
     - Sugar
     - SVProgressHUD
 
+EXTERNAL SOURCES:
+  Charts:
+    :git: https://github.com/danchokobo/Charts.git
+
+CHECKOUT OPTIONS:
+  Charts:
+    :commit: d1d1c1e153ce0538dbab96a46b948ca51ee051d1
+    :git: https://github.com/danchokobo/Charts.git
+
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
-  Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
+  Charts: 82c6776516b844809f55228d720129a9dc25b9f2
   EasyPeasy: 2f2785ed78c6f9e9045221f2ff317730e7321bff
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
@@ -41,6 +49,6 @@ SPEC CHECKSUMS:
   Sugar: afdf6d91da6112e7c3f12000bdddf1713237e0e6
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 53f6b84687e8dbd3a9f8e665a268438fd8d4f94a
+PODFILE CHECKSUM: 480bdb423f93e705132c276c43155d35163e08b4
 
 COCOAPODS: 1.5.3

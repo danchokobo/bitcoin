@@ -37,7 +37,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     /// the color for the background of the chart-drawing area (everything behind the grid lines).
     @objc open var gridBackgroundColor = NSUIColor(red: 240/255.0, green: 240/255.0, blue: 240/255.0, alpha: 1.0)
     
-    @objc open var borderColor = NSUIColor.red
+    @objc open var borderColor = NSUIColor.black
     @objc open var borderLineWidth: CGFloat = 1.0
     
     /// flag indicating if the grid background should be drawn or not
@@ -1537,7 +1537,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// is dragging on the X axis enabled?
-    open var dragXEnabled: Bool 
+    @objc open var dragXEnabled: Bool
     {
         get
         {
@@ -1550,7 +1550,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// is dragging on the Y axis enabled?
-    open var dragYEnabled: Bool
+    @objc open var dragYEnabled: Bool
     {
         get
         {

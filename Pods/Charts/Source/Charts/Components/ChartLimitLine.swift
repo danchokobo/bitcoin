@@ -34,7 +34,7 @@ open class ChartLimitLine: ComponentBase
     @objc open var lineDashPhase = CGFloat(0.0)
     @objc open var lineDashLengths: [CGFloat]?
     
-    @objc open var valueTextColor = NSUIColor.yellow
+    @objc open var valueTextColor = NSUIColor.black
     @objc open var valueFont = NSUIFont.systemFont(ofSize: 13.0)
     
     @objc open var drawLabelEnabled = true
@@ -68,18 +68,7 @@ open class ChartLimitLine: ComponentBase
         }
         set
         {
-            if newValue < 0.2
-            {
-                _lineWidth = 0.2
-            }
-            else if newValue > 12.0
-            {
-                _lineWidth = 12.0
-            }
-            else
-            {
-                _lineWidth = newValue
-            }
+            _lineWidth = newValue.clamped(to: 0.2...12)
         }
     }
 }
