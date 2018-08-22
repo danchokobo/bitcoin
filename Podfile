@@ -15,4 +15,6 @@ target 'bitcoin' do
     pod 'SVProgressHUD'
     pod 'ReachabilitySwift'
     pod 'Charts', :git => 'https://github.com/danchokobo/Charts.git'
+    pod 'AMScrollingNavbar'
+    
 end

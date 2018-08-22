@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.7.2)
+  - AMScrollingNavbar (5.0.2)
   - Charts (3.1.1):
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
@@ -12,6 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - AMScrollingNavbar
   - Charts (from `https://github.com/danchokobo/Charts.git`)
   - EasyPeasy (~> 1.6)
   - ObjectMapper (~> 3.1)
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AMScrollingNavbar
     - EasyPeasy
     - ObjectMapper
     - ReachabilitySwift
@@ -41,6 +44,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  AMScrollingNavbar: d941641a4b05c329e6050ab19e54105ba3785471
   Charts: 82c6776516b844809f55228d720129a9dc25b9f2
   EasyPeasy: 2f2785ed78c6f9e9045221f2ff317730e7321bff
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
@@ -49,6 +53,6 @@ SPEC CHECKSUMS:
   Sugar: afdf6d91da6112e7c3f12000bdddf1713237e0e6
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 480bdb423f93e705132c276c43155d35163e08b4
+PODFILE CHECKSUM: 4caa6204ee60029839ae359435bd2645cdb22491
 
 COCOAPODS: 1.5.3

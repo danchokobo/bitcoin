@@ -9,6 +9,7 @@
 import UIKit
 import EasyPeasy
 import SVProgressHUD
+import AMScrollingNavbar
 
 class TransactionViewController: UIViewController {
 
@@ -16,13 +17,16 @@ class TransactionViewController: UIViewController {
     let segmentedControl = UISegmentedControl(items: ["Buy", "Sell"])
     var transactions: [Transaction] = []
     
+    private var navbarView = UIView().then {
+        $0.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+    }
+    
     private lazy var tableView = UITableView().then {
         $0.delegate = self
         $0.dataSource = self
         $0.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionTableViewCell.identifier)
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
-
     }
 
     override func viewDidLoad() {
@@ -30,23 +34,33 @@ class TransactionViewController: UIViewController {
         SVProgressHUD.show()
         configureViews()
         configureContraints()
+        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let navigationController = navigationController as? ScrollingNavigationController {
+            navigationController.followScrollView(tableView, delay: 50.0)
+        }
     }
 }
 
 extension TransactionViewController {
     private func configureViews() {
         view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
-        view.addSubview(tableView)
+        view.addSubviews(navbarView,tableView)
         viewModel.delegate = self
         navigationItem.titleView = segmentedControl
-        segmentedControl.frame = CGRect(x: 0, y: 10, width: view.bounds.width - 50, height: 40)
+        segmentedControl.frame = CGRect(x: 0, y: 15, width: view.bounds.width - 50, height: 40)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
     }
     
     private func configureContraints() {
-        tableView.easy.layout([Edges(15)])
+        navbarView.easy.layout([Top(),Left(),Right(), Height(56)])
+        tableView.easy.layout([Top(10).to(navbarView), Left(10), Right(10), Bottom()])
     }
 }
 
@@ -93,5 +107,8 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        navigationController?.hidesBarsOnSwipe = false
     }
 }
