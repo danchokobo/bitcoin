@@ -8,28 +8,23 @@
 
 import UIKit
 import EasyPeasy
+import SVProgressHUD
 
 class TransactionViewController: UIViewController {
 
     var viewModel = TransactionViewModel()
-    
-    private lazy var collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 10
-        flowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width - 50, height: 80)
-        return UICollectionView(frame: .zero, collectionViewLayout: flowLayout).then {
-            $0.register(TransactionCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: TransactionCollectionViewCell.identifier)
-            $0.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 15, right: 0)
-            $0.backgroundColor = .clear
-            $0.delegate = self
-            $0.dataSource = self
-            $0.alwaysBounceVertical = true
-        }
-    }()
-    
+    private lazy var tableView = UITableView().then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.register(TransactionTableViewCell.self, forCellReuseIdentifier: TransactionTableViewCell.identifier)
+        $0.backgroundColor = .clear
+        $0.showsVerticalScrollIndicator = false
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.show()
         configureViews()
         configureContraints()
         title = "Transactions"
@@ -40,38 +35,42 @@ class TransactionViewController: UIViewController {
 extension TransactionViewController {
     private func configureViews() {
         view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
-        view.addSubview(collectionView)
+        view.addSubview(tableView)
         viewModel.delegate = self
     }
     
     private func configureContraints() {
-        collectionView.easy.layout([Top(20),Left(),Right(),Bottom()])
+        tableView.easy.layout([Edges(15)])
     }
 }
 
 extension TransactionViewController: TransactionViewModelDelegate {
     func dataLoaded() {
-        collectionView.reloadData()
+        tableView.reloadData()
+        SVProgressHUD.dismiss()
     }
 }
 
-extension TransactionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TransactionCollectionViewCell.identifier,
-                                                         for: indexPath) as? TransactionCollectionViewCell {
+extension TransactionViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: TransactionTableViewCell.identifier,
+                                                    for: indexPath) as? TransactionTableViewCell {
             let model = viewModel.transactions[indexPath.row]
             let amount = viewModel.getAmount(amount: Double(model.amount ?? "0.0") ?? 0.0)
             cell.priceLabel.text = "\(amount) ₿ =  \(model.price ?? "") $"
+            cell.backgroundColor = .clear
             return cell
         }
-        return UICollectionViewCell()
+        return UITableViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-    }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.transactions.count
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 }
+

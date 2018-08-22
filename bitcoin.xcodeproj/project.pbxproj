@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E6AC07BD4F56B372BEC4CC4 /* Pods_bitcoin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F8B4190361D625794F9B39C /* Pods_bitcoin.framework */; };
 		D825B5E1212C617E0057B9E7 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825B5E0212C617E0057B9E7 /* Transaction.swift */; };
-		D825B5E3212C63BC0057B9E7 /* TransactionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825B5E2212C63BC0057B9E7 /* TransactionCollectionViewCell.swift */; };
+		D825B5E3212C63BC0057B9E7 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825B5E2212C63BC0057B9E7 /* TransactionTableViewCell.swift */; };
 		D825B5E5212C6EFC0057B9E7 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D825B5E4212C6EFC0057B9E7 /* TransactionViewModel.swift */; };
 		D8369BEC212B351B00287DC3 /* Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8369BEB212B351B00287DC3 /* Bitcoin.swift */; };
 		D8369BEF212B382F00287DC3 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8369BEE212B382F00287DC3 /* Contants.swift */; };
@@ -33,7 +33,7 @@
 		3F8B4190361D625794F9B39C /* Pods_bitcoin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bitcoin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DCEB4675B19D903488B8AED /* Pods-bitcoin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcoin.release.xcconfig"; path = "Pods/Target Support Files/Pods-bitcoin/Pods-bitcoin.release.xcconfig"; sourceTree = "<group>"; };
 		D825B5E0212C617E0057B9E7 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		D825B5E2212C63BC0057B9E7 /* TransactionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCollectionViewCell.swift; sourceTree = "<group>"; };
+		D825B5E2212C63BC0057B9E7 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		D825B5E4212C6EFC0057B9E7 /* TransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		D8369BEB212B351B00287DC3 /* Bitcoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitcoin.swift; sourceTree = "<group>"; };
 		D8369BEE212B382F00287DC3 /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 			children = (
 				D85E2A77212B218E004494DD /* InfoTableViewCell.swift */,
 				D85E2A79212B219B004494DD /* ChartTableViewCell.swift */,
-				D825B5E2212C63BC0057B9E7 /* TransactionCollectionViewCell.swift */,
+				D825B5E2212C63BC0057B9E7 /* TransactionTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -374,7 +374,7 @@
 				D8369BF5212BF6B700287DC3 /* Array.swift in Sources */,
 				D85E2A73212B0E43004494DD /* TabBarViewController.swift in Sources */,
 				D8369BEF212B382F00287DC3 /* Contants.swift in Sources */,
-				D825B5E3212C63BC0057B9E7 /* TransactionCollectionViewCell.swift in Sources */,
+				D825B5E3212C63BC0057B9E7 /* TransactionTableViewCell.swift in Sources */,
 				D85E2A69212B0D4B004494DD /* TransactionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

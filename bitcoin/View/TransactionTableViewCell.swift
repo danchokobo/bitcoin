@@ -9,7 +9,7 @@
 import UIKit
 import EasyPeasy
 
-class TransactionCollectionViewCell: UICollectionViewCell {
+class TransactionTableViewCell: UITableViewCell {
     static let identifier = "TransactionCollectionViewCell"
 
     lazy var priceLabel = UILabel().then {
@@ -27,8 +27,9 @@ class TransactionCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
     }
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureViews()
         configureConstraints()
     }
@@ -38,12 +39,8 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension TransactionCollectionViewCell {
+extension TransactionTableViewCell {
     private func configureViews() {
-        layer.masksToBounds = false
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.white.cgColor
-        layer.cornerRadius = 10
         contentView.backgroundColor = .clear
         contentView.addSubviews(priceLabel, arrowImageView)
     }
