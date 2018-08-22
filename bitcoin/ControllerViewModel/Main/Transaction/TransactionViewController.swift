@@ -9,13 +9,17 @@
 import UIKit
 import EasyPeasy
 import SVProgressHUD
-import AMScrollingNavbar
 
 class TransactionViewController: UIViewController {
 
     var viewModel = TransactionViewModel()
     let segmentedControl = UISegmentedControl(items: ["Buy", "Sell"])
-    var transactions: [Transaction] = []
+    var transactions: [Transaction] = [] {
+        didSet {
+            SVProgressHUD.dismiss()
+            tableView.reloadData()
+        }
+    }
     
     private var navbarView = UIView().then {
         $0.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
@@ -34,16 +38,7 @@ class TransactionViewController: UIViewController {
         SVProgressHUD.show()
         configureViews()
         configureContraints()
-        navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if let navigationController = navigationController as? ScrollingNavigationController {
-            navigationController.followScrollView(tableView, delay: 50.0)
-        }
     }
 }
 
@@ -66,9 +61,9 @@ extension TransactionViewController {
 
 extension TransactionViewController: TransactionViewModelDelegate {
     func dataLoaded() {
+        SVProgressHUD.dismiss()
         transactions = viewModel.transactionsForBuy
         tableView.reloadData()
-        SVProgressHUD.dismiss()
     }
 }
 
@@ -110,5 +105,11 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
     }
     func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
         navigationController?.hidesBarsOnSwipe = false
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailViewController()
+        vc.transaction = transactions[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
