@@ -11,10 +11,7 @@ target 'bitcoin' do
     pod 'EasyPeasy', '~> 1.6'
     pod 'ObjectMapper', '~> 3.1'
     pod 'Alamofire', '~> 4.7'
-    pod 'SkeletonView'
     pod 'SVProgressHUD'
-    pod 'ReachabilitySwift'
     pod 'Charts', :git => 'https://github.com/danchokobo/Charts.git'
-    pod 'AMScrollingNavbar'
     
 end
