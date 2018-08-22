@@ -14,7 +14,7 @@ class Transaction: Mappable {
     var id: String?
     var price: String?
     var type: Int?
-    var amount : Double?
+    var amount : String?
     
     init() {}
     
@@ -25,6 +25,6 @@ class Transaction: Mappable {
         id <- map["tid"]
         price <- map["price"]
         type <- map["type"]
-        amount <- map["type"]
+        amount <- map["amount"]
     }
 }

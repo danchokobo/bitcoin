@@ -13,8 +13,8 @@ class TransactionCollectionViewCell: UICollectionViewCell {
     static let identifier = "TransactionCollectionViewCell"
 
     lazy var priceLabel = UILabel().then {
-        $0.font = UIFont.systemFont(ofSize: 32, weight: .thin)
-        $0.text = "0.065 B = 6754 $"
+        $0.font = UIFont.systemFont(ofSize: 30, weight: .thin)
+        $0.text = "0.065 ₿ = 6754 $"
         $0.textColor = .white
     }
     
@@ -52,7 +52,7 @@ extension TransactionCollectionViewCell {
         priceLabel.easy.layout([
             CenterY(),
             Left(10),
-            Right(10),
+            Right(15),
             Width(self.bounds.width)
         ])
         arrowImageView.easy.layout([
@@ -61,5 +61,4 @@ extension TransactionCollectionViewCell {
             Right(10)
             ])
     }
-   
 }

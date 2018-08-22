@@ -41,6 +41,7 @@ extension TransactionViewController {
     private func configureViews() {
         view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
         view.addSubview(collectionView)
+        viewModel.delegate = self
     }
     
     private func configureContraints() {
@@ -48,10 +49,19 @@ extension TransactionViewController {
     }
 }
 
+extension TransactionViewController: TransactionViewModelDelegate {
+    func dataLoaded() {
+        collectionView.reloadData()
+    }
+}
+
 extension TransactionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TransactionCollectionViewCell.identifier,
                                                          for: indexPath) as? TransactionCollectionViewCell {
+            let model = viewModel.transactions[indexPath.row]
+            let amount = viewModel.getAmount(amount: Double(model.amount ?? "0.0") ?? 0.0)
+            cell.priceLabel.text = "\(amount) ₿ =  \(model.price ?? "") $"
             return cell
         }
         return UICollectionViewCell()
@@ -62,6 +72,6 @@ extension TransactionViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return viewModel.transactions.count
     }
 }
