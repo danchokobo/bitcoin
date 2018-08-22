@@ -48,6 +48,11 @@ class DetailInfoView: UIView {
         $0.textAlignment = .right
     }
     
+    lazy var typeIconImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFit
+        $0.image = #imageLiteral(resourceName: "sold").resizeImage(44)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
@@ -63,12 +68,12 @@ extension DetailInfoView {
     private func configureViews() {
         self.backgroundColor = .white
         self.layer.cornerRadius = 10
-        self.addSubviews(dateLabel, idLabel, idValueLabel, amountLabel, amountValueLabel, priceLabel)
+        self.addSubviews(dateLabel, idLabel, idValueLabel, amountLabel, amountValueLabel, priceLabel, typeIconImageView)
     }
     
     private func configureContraints() {
         dateLabel.easy.layout([
-            Top(20),
+            Top(25),
             Right(20)
         ])
         idLabel.easy.layout([
@@ -95,11 +100,17 @@ extension DetailInfoView {
             Bottom(20),
             Right(20)
         ])
+        typeIconImageView.easy.layout([
+            Bottom(25),
+            Left(20),
+            Size(50)
+            ])
     }
     
     func configureData(transaction: Transaction) {
         idValueLabel.text = transaction.id
         amountValueLabel.text = transaction.amount
-        priceLabel.text = transaction.price
+        priceLabel.text = "\(transaction.price ?? "") $"
+        typeIconImageView.image = transaction.type == "0" ? #imageLiteral(resourceName: "buy").resizeImage(44) : #imageLiteral(resourceName: "sold").resizeImage(50)
     }
 }

@@ -36,7 +36,7 @@ extension DetailViewController {
             Top(100),
             Left(20),
             Right(20),
-            Height(200)
+            Height(250)
         ])
     }
 }
