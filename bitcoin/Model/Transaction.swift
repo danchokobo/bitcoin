@@ -13,7 +13,7 @@ class Transaction: Mappable {
     var date: String?
     var id: String?
     var price: String?
-    var type: Int?
+    var type: String?
     var amount : String?
     
     init() {}

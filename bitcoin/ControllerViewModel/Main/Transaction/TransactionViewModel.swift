@@ -15,7 +15,8 @@ protocol TransactionViewModelDelegate: class {
 }
 
 class TransactionViewModel {
-    var transactions: [Transaction] = []
+    var transactionsForSell: [Transaction] = []
+    var transactionsForBuy: [Transaction] = []
     var delegate: TransactionViewModelDelegate?
     
     init() {
@@ -29,7 +30,9 @@ extension TransactionViewModel {
             if response.result.isSuccess {
                 if let json = response.result.value as? [[String: Any]] {
                     let data = json.compactMap({Transaction(JSON: $0)})
-                    self.transactions  = Array(data.prefix(500))
+                    let all  = Array(data.prefix(500))
+                    self.transactionsForSell = all.filter { $0.type == "1"}
+                    self.transactionsForBuy = all.filter { $0.type == "0"}
                     self.delegate?.dataLoaded()
                 }
             }else{
