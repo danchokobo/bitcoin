@@ -58,4 +58,8 @@ extension TransactionTableViewCell {
             Right(10)
             ])
     }
+    
+    func configureCell(amount: String, price: String?) {
+        priceLabel.text = "\(amount)₿ = \(price ?? "")$"
+    }
 }

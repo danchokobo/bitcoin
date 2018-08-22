@@ -47,7 +47,8 @@ extension TransactionViewModel {
         return dateFormatter.string(from: date)
     }
     
-    func getAmount(amount: Double) -> String {
-        return String(amount.rounded(toPlaces: 4))
+    func getAmount(amount: String?) -> String {
+        let dAmount = Double(amount ?? "0.0") ?? 0.0
+        return String(dAmount.rounded(toPlaces: 4))
     }
 }

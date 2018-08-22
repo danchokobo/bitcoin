@@ -56,8 +56,9 @@ extension TransactionViewController: UITableViewDelegate, UITableViewDataSource 
         if let cell = tableView.dequeueReusableCell(withIdentifier: TransactionTableViewCell.identifier,
                                                     for: indexPath) as? TransactionTableViewCell {
             let model = viewModel.transactions[indexPath.row]
-            let amount = viewModel.getAmount(amount: Double(model.amount ?? "0.0") ?? 0.0)
-            cell.priceLabel.text = "\(amount) ₿ =  \(model.price ?? "") $"
+            let amount = viewModel.getAmount(amount: model.amount)
+            cell.configureCell(amount: amount, price: model.price)
+            cell.selectionStyle = .none
             cell.backgroundColor = .clear
             return cell
         }
