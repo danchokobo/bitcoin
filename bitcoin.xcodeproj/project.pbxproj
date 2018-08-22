@@ -29,6 +29,8 @@
 		D85E2A7A212B219B004494DD /* ChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85E2A79212B219B004494DD /* ChartTableViewCell.swift */; };
 		D862AA01212D7C3400B836A8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D862AA00212D7C3400B836A8 /* DetailViewController.swift */; };
 		D862AA03212D7C5C00B836A8 /* DetailInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D862AA02212D7C5C00B836A8 /* DetailInfoView.swift */; };
+		D862AA07212DC75A00B836A8 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = D862AA06212DC75A00B836A8 /* Converter.m */; };
+		D862AA0A212DCAF400B836A8 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D862AA09212DCAF400B836A8 /* TestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,11 @@
 		D85E2A79212B219B004494DD /* ChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartTableViewCell.swift; sourceTree = "<group>"; };
 		D862AA00212D7C3400B836A8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		D862AA02212D7C5C00B836A8 /* DetailInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoView.swift; sourceTree = "<group>"; };
+		D862AA04212DC71D00B836A8 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		D862AA05212DC75A00B836A8 /* Converter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
+		D862AA06212DC75A00B836A8 /* Converter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
+		D862AA08212DCAF400B836A8 /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		D862AA09212DCAF400B836A8 /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		E25DED7CA7569240E4085A6E /* Pods-bitcoin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bitcoin.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bitcoin/Pods-bitcoin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +133,11 @@
 				D85E2A5F212B0CC9004494DD /* Model */,
 				D85E2A65212B0D00004494DD /* Others */,
 				D85E2A64212B0CF6004494DD /* Resources */,
+				D862AA04212DC71D00B836A8 /* BridgingHeader.h */,
+				D862AA05212DC75A00B836A8 /* Converter.h */,
+				D862AA08212DCAF400B836A8 /* TestViewController.h */,
+				D862AA09212DCAF400B836A8 /* TestViewController.m */,
+				D862AA06212DC75A00B836A8 /* Converter.m */,
 			);
 			path = bitcoin;
 			sourceTree = "<group>";
@@ -274,6 +286,7 @@
 				TargetAttributes = {
 					D85E2A49212B0C48004494DD = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -369,12 +382,14 @@
 				D85E2A78212B218E004494DD /* InfoTableViewCell.swift in Sources */,
 				D862AA03212D7C5C00B836A8 /* DetailInfoView.swift in Sources */,
 				D85E2A67212B0D39004494DD /* DashboardViewController.swift in Sources */,
+				D862AA07212DC75A00B836A8 /* Converter.m in Sources */,
 				D85E2A76212B10CC004494DD /* ImageTools.swift in Sources */,
 				D8369BF3212BEA0500287DC3 /* DateTools.swift in Sources */,
 				D825B5E5212C6EFC0057B9E7 /* TransactionViewModel.swift in Sources */,
 				D85E2A6E212B0DB2004494DD /* DashboardViewModel.swift in Sources */,
 				D8369BEC212B351B00287DC3 /* Bitcoin.swift in Sources */,
 				D85E2A4E212B0C48004494DD /* AppDelegate.swift in Sources */,
+				D862AA0A212DCAF400B836A8 /* TestViewController.m in Sources */,
 				D8369BF5212BF6B700287DC3 /* Array.swift in Sources */,
 				D85E2A73212B0E43004494DD /* TabBarViewController.swift in Sources */,
 				D8369BEF212B382F00287DC3 /* Contants.swift in Sources */,
@@ -524,6 +539,7 @@
 			baseConfigurationReference = E25DED7CA7569240E4085A6E /* Pods-bitcoin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F82QYRE4N3;
 				INFOPLIST_FILE = bitcoin/Info.plist;
@@ -533,6 +549,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = bitcoin/BridgingHeader.h;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -543,6 +561,7 @@
 			baseConfigurationReference = 6DCEB4675B19D903488B8AED /* Pods-bitcoin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F82QYRE4N3;
 				INFOPLIST_FILE = bitcoin/Info.plist;
@@ -552,6 +571,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bitcoin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = bitcoin/BridgingHeader.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
