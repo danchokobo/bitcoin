@@ -16,7 +16,6 @@ class TransactionViewController: UIViewController {
     let segmentedControl = UISegmentedControl(items: ["Buy", "Sell"])
     var transactions: [Transaction] = [] {
         didSet {
-            SVProgressHUD.dismiss()
             tableView.reloadData()
         }
     }
@@ -38,6 +37,7 @@ class TransactionViewController: UIViewController {
         SVProgressHUD.show()
         configureViews()
         configureContraints()
+        transactions = viewModel.transactionsForBuy
         // Do any additional setup after loading the view.
     }
 }
@@ -61,9 +61,9 @@ extension TransactionViewController {
 
 extension TransactionViewController: TransactionViewModelDelegate {
     func dataLoaded() {
-        SVProgressHUD.dismiss()
         transactions = viewModel.transactionsForBuy
         tableView.reloadData()
+        SVProgressHUD.dismiss()
     }
 }
 

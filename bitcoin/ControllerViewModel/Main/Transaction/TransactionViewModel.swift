@@ -26,6 +26,7 @@ class TransactionViewModel {
 
 extension TransactionViewModel {
     private func fetchTransactions() {
+        SVProgressHUD.show()
         Alamofire.request(Constants.transactions).responseJSON { (response) in
             if response.result.isSuccess {
                 if let json = response.result.value as? [[String: Any]] {
