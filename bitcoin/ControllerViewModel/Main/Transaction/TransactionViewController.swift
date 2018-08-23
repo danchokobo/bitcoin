@@ -40,6 +40,13 @@ class TransactionViewController: UIViewController {
         transactions = viewModel.transactionsForBuy
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if !transactions.isEmpty {
+            SVProgressHUD.dismiss()
+        }
+    }
 }
 
 extension TransactionViewController {

@@ -17,7 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [[UIColor alloc] initWithRed: 0.05882352963 green: 0.180392161 blue: 0.2470588237 alpha: 1.0];
-    self.navigationItem.title = @"Calculator";
     [ self configureTextfields];
     [ self configureLabel];
     // Do any additional setup after loading the view.
@@ -40,11 +39,12 @@
                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                            [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)],
                            nil];
+    [numberToolbar setTintColor:[UIColor whiteColor]];
     [numberToolbar sizeToFit];
     moneyTextfield = [[UITextField alloc] initWithFrame: CGRectMake(20, 100, self.view.frame.size.width - 40, 44)];
     moneyTextfield.backgroundColor = [UIColor whiteColor];
-    moneyTextfield.font = [UIFont systemFontOfSize:15];
-    moneyTextfield.placeholder = @"Enter amount of Bitcoin";
+    moneyTextfield.font = [UIFont systemFontOfSize:32];
+    moneyTextfield.placeholder = @"Enter money";
     moneyTextfield.textAlignment = NSTextAlignmentCenter;
     moneyTextfield.autocorrectionType = UITextAutocorrectionTypeNo;
     moneyTextfield.keyboardType = UIKeyboardTypeNumberPad;
@@ -78,17 +78,46 @@
     convertButton.backgroundColor = [UIColor clearColor];
     [convertButton setTitle:@"How much I can buy?" forState: UIControlStateNormal];
     [convertButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    convertButton.
-    [self.view addSubview:convertButton];
-}
+    [convertButton addTarget:self action:@selector(getAmountOfBitcoin:) forControlEvents:UIControlEventTouchUpInside];
 
-- (void) configureButton {
+    [self.view addSubview:convertButton];
     
+    double widthOfButton = (self.view.frame.size.width - 40)/3;
+    dollartButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 50, widthOfButton, 44)];
+    dollartButton.layer.borderWidth = 1;
+    dollartButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    dollartButton.backgroundColor = [UIColor clearColor];
+    [dollartButton setTitle:@"$" forState: UIControlStateNormal];
+    [dollartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.view addSubview:dollartButton];
+    
+    tengeButton = [[UIButton alloc] initWithFrame: CGRectMake(widthOfButton + 20, 50, widthOfButton, 44)];
+    tengeButton.layer.borderWidth = 1;
+    tengeButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    tengeButton.backgroundColor = [UIColor clearColor];
+    [tengeButton setTitle:@"₸" forState: UIControlStateNormal];
+    [tengeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.view addSubview:tengeButton];
+    
+    euroButton = [[UIButton alloc] initWithFrame: CGRectMake(widthOfButton*2 + 20, 50, widthOfButton, 44)];
+    euroButton.layer.borderWidth = 1;
+    euroButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    euroButton.backgroundColor = [UIColor clearColor];
+    [euroButton setTitle:@"€" forState: UIControlStateNormal];
+    [euroButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.view addSubview:euroButton];
+
 }
 
 
 - (void) doneWithNumberPad {
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
+
+-(void)getAmountOfBitcoin:(UIButton *)sender
+{
+    // do calculation
+    resultLabel.text = @"77777 B";
 }
 
 @end

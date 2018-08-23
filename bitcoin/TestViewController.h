@@ -14,5 +14,9 @@
     UILabel *btxLabel;
     UILabel *resultLabel;
     UIButton *convertButton;
+    UIButton *dollartButton;
+    UIButton *euroButton;
+    UIButton *tengeButton;
+    
 }
 @end
