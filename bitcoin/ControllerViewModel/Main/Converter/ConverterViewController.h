@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestViewController : UIViewController<UITextFieldDelegate>
+@interface ConverterViewController : UIViewController<UITextFieldDelegate>
 {
     UITextField *moneyTextfield;
     UILabel *btxLabel;
     UILabel *resultLabel;
     UIButton *convertButton;
-    UIButton *dollartButton;
+    UIButton *dollarButton;
     UIButton *euroButton;
     UIButton *tengeButton;
     

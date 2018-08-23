@@ -67,7 +67,7 @@ class DetailInfoView: UIView {
 extension DetailInfoView {
     private func configureViews() {
         self.backgroundColor = .white
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 5
         self.addSubviews(dateLabel, idLabel, idValueLabel, amountLabel, amountValueLabel, priceLabel, typeIconImageView)
     }
     

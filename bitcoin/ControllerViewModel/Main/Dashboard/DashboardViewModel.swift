@@ -37,8 +37,12 @@ extension DashboardViewModel {
                     }
                     let bit = Bitcoin(JSON: data)
                     self.bitcoin.dollar = bit?.dollar
+                    UserDefaults.standard.set(bit?.dollar, forKey: "usd")
                     self.getInEuro()
                 }
+            }else{
+                SVProgressHUD.showError(withStatus: "Problem with internet connection, please try later")
+                SVProgressHUD.dismiss(withDelay: 2)
             }
         }
     }
@@ -52,8 +56,12 @@ extension DashboardViewModel {
                     }
                     let bit = Bitcoin(JSON: data)
                     self.bitcoin.tenge = bit?.tenge
+                    UserDefaults.standard.set(bit?.tenge, forKey: "tenge")
                     self.getInDollar()
                 }
+            }else{
+                SVProgressHUD.showError(withStatus: "Problem with internet connection, please try later")
+                SVProgressHUD.dismiss(withDelay: 2)
             }
         }
     }
@@ -67,8 +75,11 @@ extension DashboardViewModel {
                     }
                     let bit = Bitcoin(JSON: data)
                     self.bitcoin.euro = bit?.euro
+                    UserDefaults.standard.set(bit?.euro, forKey: "euro")
                     self.delegate?.updateBitcoin()
                 }
+            }else{
+                SVProgressHUD.showError(withStatus: "Problem with internet connection, please try later")
             }
         }
     }
@@ -93,6 +104,9 @@ extension DashboardViewModel {
                     }
                     self.fetchForMonth(currency: currency)
                 }
+            }else{
+                SVProgressHUD.showError(withStatus: "Problem with internet connection, please try later")
+                SVProgressHUD.dismiss(withDelay: 2)
             }
         }
     }
@@ -110,6 +124,9 @@ extension DashboardViewModel {
                     self.getDataForMonth(data: data)
                     self.fetchForYear(currency: currency)
                 }
+            }else{
+                SVProgressHUD.showError(withStatus: "Problem with internet connection, please try later")
+                SVProgressHUD.dismiss(withDelay: 2)
             }
         }
     }
@@ -128,6 +145,9 @@ extension DashboardViewModel {
                     SVProgressHUD.dismiss()
                     self.delegate?.updateBitcoin()
                 }
+            }else{
+                SVProgressHUD.showError(withStatus: "Problem with internet connection, please try later")
+                SVProgressHUD.dismiss(withDelay: 2)
             }
         }
     }

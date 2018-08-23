@@ -39,7 +39,6 @@ class ChartTableViewCell: UITableViewCell {
         $0.setTitle("Month", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.addTarget(self, action: #selector(monthDidPress), for: .touchUpInside)
-        $0.layer.cornerRadius = 5
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
     }
@@ -47,7 +46,6 @@ class ChartTableViewCell: UITableViewCell {
     lazy var yearButton = UIButton().then {
         $0.setTitle("Year", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 5
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
         $0.addTarget(self, action: #selector(yearDidPress), for: .touchUpInside)
@@ -56,7 +54,6 @@ class ChartTableViewCell: UITableViewCell {
     lazy var weekButton = UIButton().then {
         $0.setTitle("Week", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 5
         $0.layer.borderWidth = 1
         $0.layer.borderColor = UIColor.white.cgColor
         $0.addTarget(self, action: #selector(weekDidPress), for: .touchUpInside)

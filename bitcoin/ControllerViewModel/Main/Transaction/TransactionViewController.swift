@@ -45,6 +45,9 @@ class TransactionViewController: UIViewController {
         super.viewWillAppear(animated)
         if !transactions.isEmpty {
             SVProgressHUD.dismiss()
+        } else if viewModel.cannotLoad {
+            SVProgressHUD.showError(withStatus: "Check the internet connection")
+            SVProgressHUD.dismiss(withDelay: 2)
         }
     }
 }
@@ -55,7 +58,7 @@ extension TransactionViewController {
         view.addSubviews(navbarView,tableView)
         viewModel.delegate = self
         navigationItem.titleView = segmentedControl
-        segmentedControl.frame = CGRect(x: 0, y: 15, width: view.bounds.width - 50, height: 40)
+        segmentedControl.frame = CGRect(x: 0, y: 15, width: view.bounds.width - 50, height: 30)
         segmentedControl.selectedSegmentIndex = 0
         segmentedControl.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
     }

@@ -9,7 +9,6 @@
 #ifndef BridgingHeader_h
 #define BridgingHeader_h
 
-#import "Converter.h"
-#import "TestViewController.h"
+#import "ConverterViewController.h"
 
 #endif /* BridgingHeader_h */

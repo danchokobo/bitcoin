@@ -18,6 +18,7 @@ class TransactionViewModel {
     var transactionsForSell: [Transaction] = []
     var transactionsForBuy: [Transaction] = []
     var delegate: TransactionViewModelDelegate?
+    var cannotLoad = false
     
     init() {
         fetchTransactions()
@@ -38,6 +39,8 @@ extension TransactionViewModel {
                 }
             }else{
                 SVProgressHUD.showError(withStatus: "Problem with internet connection, please try later")
+                SVProgressHUD.dismiss(withDelay: 2)
+                self.cannotLoad = true
             }
         }
     }

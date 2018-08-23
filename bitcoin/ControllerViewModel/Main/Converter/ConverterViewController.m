@@ -6,25 +6,23 @@
 //  Copyright © 2018 Danagul Otel. All rights reserved.
 //
 
-#import "TestViewController.h"
+#import "ConverterViewController.h"
+#import "SVProgressHUD.h"
 
-@interface TestViewController ()
-
+@interface ConverterViewController ()
+@property (assign) double currencyDivider;
 @end
 
-@implementation TestViewController
+@implementation ConverterViewController
+
+@synthesize currencyDivider;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [[UIColor alloc] initWithRed: 0.05882352963 green: 0.180392161 blue: 0.2470588237 alpha: 1.0];
-    [ self configureTextfields];
-    [ self configureLabel];
+    currencyDivider = [[NSUserDefaults standardUserDefaults] doubleForKey:@"usd"];
+    [ self configureViews];
     // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -32,7 +30,7 @@
     return YES;
 }
 
-- (void) configureTextfields {
+- (void) configureViews {
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
     numberToolbar.items = [NSArray arrayWithObjects:
@@ -46,18 +44,13 @@
     moneyTextfield.font = [UIFont systemFontOfSize:32];
     moneyTextfield.placeholder = @"Enter money";
     moneyTextfield.textAlignment = NSTextAlignmentCenter;
-    moneyTextfield.autocorrectionType = UITextAutocorrectionTypeNo;
     moneyTextfield.keyboardType = UIKeyboardTypeNumberPad;
     moneyTextfield.returnKeyType = UIReturnKeyDone;
     moneyTextfield.inputAccessoryView = numberToolbar;
     moneyTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
-    moneyTextfield.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     moneyTextfield.delegate = self;
     
     [self.view addSubview:moneyTextfield];
-}
-
-- (void) configureLabel {
     btxLabel = [[UILabel alloc] initWithFrame: CGRectMake(20, 150, self.view.frame.size.width - 40, 44)];
     btxLabel.text = @"XBT";
     btxLabel.font = [UIFont systemFontOfSize: 32];
@@ -78,18 +71,21 @@
     convertButton.backgroundColor = [UIColor clearColor];
     [convertButton setTitle:@"How much I can buy?" forState: UIControlStateNormal];
     [convertButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [convertButton addTarget:self action:@selector(getAmountOfBitcoin:) forControlEvents:UIControlEventTouchUpInside];
+    [convertButton addTarget:self action:@selector(getAmountOfBitcoin) forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:convertButton];
     
     double widthOfButton = (self.view.frame.size.width - 40)/3;
-    dollartButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 50, widthOfButton, 44)];
-    dollartButton.layer.borderWidth = 1;
-    dollartButton.layer.borderColor = [UIColor whiteColor].CGColor;
-    dollartButton.backgroundColor = [UIColor clearColor];
-    [dollartButton setTitle:@"$" forState: UIControlStateNormal];
-    [dollartButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.view addSubview:dollartButton];
+    dollarButton = [[UIButton alloc] initWithFrame: CGRectMake(20, 50, widthOfButton, 44)];
+    dollarButton.layer.borderWidth = 1;
+    dollarButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    dollarButton.backgroundColor = [UIColor clearColor];
+    [dollarButton setTitle:@"$" forState: UIControlStateNormal];
+    [dollarButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [dollarButton addTarget:self action:@selector(setUsdCurrency) forControlEvents:UIControlEventTouchUpInside];
+    [dollarButton setTitleColor:[UIColor yellowColor] forState:UIControlStateSelected];
+
+    [self.view addSubview:dollarButton];
     
     tengeButton = [[UIButton alloc] initWithFrame: CGRectMake(widthOfButton + 20, 50, widthOfButton, 44)];
     tengeButton.layer.borderWidth = 1;
@@ -97,6 +93,9 @@
     tengeButton.backgroundColor = [UIColor clearColor];
     [tengeButton setTitle:@"₸" forState: UIControlStateNormal];
     [tengeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [tengeButton setTitleColor:[UIColor yellowColor] forState:UIControlStateSelected];
+    [tengeButton addTarget:self action:@selector(setTengeCurrency) forControlEvents:UIControlEventTouchUpInside];
+
     [self.view addSubview:tengeButton];
     
     euroButton = [[UIButton alloc] initWithFrame: CGRectMake(widthOfButton*2 + 20, 50, widthOfButton, 44)];
@@ -105,6 +104,8 @@
     euroButton.backgroundColor = [UIColor clearColor];
     [euroButton setTitle:@"€" forState: UIControlStateNormal];
     [euroButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [euroButton setTitleColor:[UIColor yellowColor] forState:UIControlStateSelected];
+    [euroButton addTarget:self action:@selector(setEuroCurrency) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:euroButton];
 
 }
@@ -114,10 +115,43 @@
     [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
--(void)getAmountOfBitcoin:(UIButton *)sender
+- (void) getAmountOfBitcoin
 {
-    // do calculation
-    resultLabel.text = @"77777 B";
+    if ([moneyTextfield.text isEqualToString:@""])
+    {
+        [SVProgressHUD showErrorWithStatus:@"Please, enter money"];
+        [SVProgressHUD dismissWithDelay:1];
+        return;
+    }
+    double money = [moneyTextfield.text doubleValue];
+    double result = money/currencyDivider;
+    NSString *theString = [NSString stringWithFormat:@"%.8f", result];
+    resultLabel.text = theString;
+}
+
+- (void) setUsdCurrency {
+    currencyDivider = [[NSUserDefaults standardUserDefaults] doubleForKey:@"usd"];
+    [dollarButton setSelected:YES];
+    [tengeButton setSelected:NO];
+    [euroButton setSelected:NO];
+
+    [self getAmountOfBitcoin];
+}
+
+- (void) setEuroCurrency {
+    currencyDivider = [[NSUserDefaults standardUserDefaults] doubleForKey:@"euro"];
+    [euroButton setSelected:YES];
+    [tengeButton setSelected:NO];
+    [dollarButton setSelected:NO];
+    [self getAmountOfBitcoin];
+}
+
+- (void) setTengeCurrency {
+    currencyDivider = [[NSUserDefaults standardUserDefaults] doubleForKey:@"tenge"];
+    [tengeButton setSelected:YES];
+    [dollarButton setSelected:NO];
+    [euroButton setSelected:NO];
+    [self getAmountOfBitcoin];
 }
 
 @end
